@@ -59,13 +59,13 @@ public class TrumpetSkeletonEntity extends SkeletonEntity {
 
     @Override
     public void updateAttackType() {
-        if (constructed && world != null && !world.isClient) {
+        if (constructed && getWorld() != null && !getWorld().isClient) {
             goalSelector.remove(meleeAttackGoal);
             goalSelector.remove(trumpetAttackGoal);
             ItemStack stack = getStackInHand(ProjectileUtil.getHandPossiblyHolding(this, TrumpetSkeletonItems.TRUMPET));
             if (stack.getItem() == TrumpetSkeletonItems.TRUMPET) {
                 int attackInterval = 40;
-                if (world.getDifficulty() != Difficulty.HARD) {
+                if (getWorld().getDifficulty() != Difficulty.HARD) {
                     attackInterval = 80;
                 }
 

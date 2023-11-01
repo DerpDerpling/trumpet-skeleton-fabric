@@ -6,11 +6,14 @@ import com.jamieswhiteshirt.trumpetskeleton.common.sound.TrumpetSkeletonSoundEve
 import com.jamieswhiteshirt.trumpetskeleton.mixin.ParrotEntityAccessor;
 import com.jamieswhiteshirt.trumpetskeleton.mixin.SpawnRestrictionAccessor;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.entity.SpawnRestriction;
 import net.minecraft.entity.mob.AbstractSkeletonEntity;
 import net.minecraft.entity.mob.HostileEntity;
+import net.minecraft.item.ItemGroups;
+import net.minecraft.item.Items;
 import net.minecraft.world.Heightmap;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -54,6 +57,12 @@ public class TrumpetSkeleton implements ModInitializer {
                 LOGGER.error("Could not write configuration file \"" + configurationFile + "\"", e);
             }
         }
+        ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS).register(content -> {
+            content.addAfter(Items.TNT_MINECART, TrumpetSkeletonItems.TRUMPET);
+        });
+        ItemGroupEvents.modifyEntriesEvent(ItemGroups.SPAWN_EGGS).register(content -> {
+            content.add(TrumpetSkeletonItems.TRUMPET_SKELETON_SPAWN_EGG);
+        });
 
         String relativeSpawnRateString = configuration.getProperty("relativeSpawnWeight");
         try {
