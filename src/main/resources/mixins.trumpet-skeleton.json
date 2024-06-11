@@ -3,12 +3,10 @@
   "package": "com.jamieswhiteshirt.trumpetskeleton.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-
     "ParrotEntityAccessor",
     "SpawnRestrictionAccessor"
   ],
   "client": [
-    "client.HeldItemRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1

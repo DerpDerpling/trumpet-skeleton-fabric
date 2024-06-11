@@ -2,6 +2,7 @@ package com.jamieswhiteshirt.trumpetskeleton.common.item;
 
 import com.jamieswhiteshirt.trumpetskeleton.common.Scare;
 import com.jamieswhiteshirt.trumpetskeleton.common.sound.TrumpetSkeletonSoundEvents;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -23,18 +24,18 @@ public class TrumpetItem extends Item {
     }
 
     @Override
-    public int getMaxUseTime(ItemStack stack) {
+    public int getMaxUseTime(ItemStack stack, LivingEntity user) {
         return 55;
     }
 
     @Override
     public void usageTick(World world, LivingEntity entity, ItemStack stack, int useTimeLeft) {
         super.usageTick(world, entity, stack, useTimeLeft);
-        int useTime = getMaxUseTime(stack) - useTimeLeft;
+        int useTime = getMaxUseTime(stack, entity) - useTimeLeft;
         if (useTime == 10) {
             entity.playSound(TrumpetSkeletonSoundEvents.TRUMPET_USE, 1.0F, 0.9F + world.random.nextFloat() * 0.2F);
             Scare.scare(world, entity);
-            stack.damage(1, entity, e -> e.sendToolBreakStatus(entity.getActiveHand()));
+            {stack.damage(1, entity, EquipmentSlot.MAINHAND);}
         } else if (useTime >= 15) {
             entity.stopUsingItem();
         }

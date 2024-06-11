@@ -12,7 +12,7 @@ public class TrumpetSkeletonItems {
     public static final Item TRUMPET_SKELETON_SPAWN_EGG = register("trumpet_skeleton_spawn_egg", new SpawnEggItem(TrumpetSkeletonEntityTypes.TRUMPET_SKELETON, 0xC1C1C1, 0xFCFC00, (new Item.Settings())));
 
     private static Item register(String id, Item item) {
-        return register(new Identifier("trumpet-skeleton", id), item);
+        return register(Identifier.of("trumpet-skeleton", id), item);
     }
 
     private static Item register(Identifier id, Item item) {

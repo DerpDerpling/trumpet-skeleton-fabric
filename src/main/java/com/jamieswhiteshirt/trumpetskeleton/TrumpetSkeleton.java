@@ -9,6 +9,7 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.entity.SpawnLocationTypes;
 import net.minecraft.entity.SpawnRestriction;
 import net.minecraft.entity.mob.AbstractSkeletonEntity;
 import net.minecraft.entity.mob.HostileEntity;
@@ -35,7 +36,7 @@ public class TrumpetSkeleton implements ModInitializer {
         TrumpetSkeletonEntityTypes.init();
 
         ParrotEntityAccessor.trumpetskeleton$getMobSounds().put(TrumpetSkeletonEntityTypes.TRUMPET_SKELETON, TrumpetSkeletonSoundEvents.ENTITY_PARROT_IMITATE_TRUMPET_SKELETON);
-        SpawnRestrictionAccessor.trumpetskeleton$register(TrumpetSkeletonEntityTypes.TRUMPET_SKELETON, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, HostileEntity::canSpawnInDark);
+        SpawnRestrictionAccessor.trumpetskeleton$register(TrumpetSkeletonEntityTypes.TRUMPET_SKELETON, SpawnLocationTypes.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, HostileEntity::canSpawnInDark);
         FabricDefaultAttributeRegistry.register(TrumpetSkeletonEntityTypes.TRUMPET_SKELETON, AbstractSkeletonEntity.createAbstractSkeletonAttributes());
 
         Properties configuration = new Properties();
@@ -57,9 +58,11 @@ public class TrumpetSkeleton implements ModInitializer {
                 LOGGER.error("Could not write configuration file \"" + configurationFile + "\"", e);
             }
         }
+
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS).register(content -> {
             content.addAfter(Items.TNT_MINECART, TrumpetSkeletonItems.TRUMPET);
         });
+
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.SPAWN_EGGS).register(content -> {
             content.add(TrumpetSkeletonItems.TRUMPET_SKELETON_SPAWN_EGG);
         });

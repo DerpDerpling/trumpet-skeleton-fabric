@@ -14,7 +14,7 @@ public class TrumpetSkeletonEntityTypes {
     public static final EntityType<TrumpetSkeletonEntity> TRUMPET_SKELETON = register("trumpet_skeleton", FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, TrumpetSkeletonEntity::new).dimensions(EntityDimensions.changing(0.6F, 1.99F)));
 
     private static <T extends Entity> EntityType<T> register(String id, FabricEntityTypeBuilder<T> builder) {
-        return register(new Identifier("trumpet-skeleton", id), builder);
+        return register(Identifier.of("trumpet-skeleton", id), builder);
     }
 
     private static <T extends Entity> EntityType<T> register(Identifier id, FabricEntityTypeBuilder<T> builder) {

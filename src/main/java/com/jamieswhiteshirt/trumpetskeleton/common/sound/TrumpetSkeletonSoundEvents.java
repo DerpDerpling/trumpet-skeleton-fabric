@@ -12,7 +12,7 @@ public class TrumpetSkeletonSoundEvents {
     public static final SoundEvent TRUMPET_USE = register("item.trumpet.use");
 
     private static SoundEvent register(String id) {
-        return register(new Identifier("trumpet-skeleton", id));
+        return register(Identifier.of("trumpet-skeleton", id));
     }
 
     private static SoundEvent register(Identifier id) {
